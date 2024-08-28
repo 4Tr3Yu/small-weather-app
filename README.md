@@ -1,5 +1,15 @@
-# Vue 3 + TypeScript + Vite
+# Small Weather App
+	A small weather application should be created with following basic functionalities:
+	- Show three tabs with predefined cities (Rio de Janeiro, Beijing and Los Angeles)
+	- Connect to a backend to get the weather data
+	- Show for the selected city a forecast for the next hours and the next days should be
+	presented
+	- The user should get the ability to refresh the data
+	- On the next page is a mockup for the small weather application
+	- Weather icons are available at https://openweathermap.org/weather-conditions
+	- Bonus: allow to search for a city
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Installing
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+	- ```bun install```
+	- ```bun dev```
