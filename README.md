@@ -13,3 +13,7 @@
 
 	- ```bun install```
 	- ```bun dev```
+
+### Notes
+- This one is the only API that worked with the provided apiKey: https://openweathermap.org/forecast5
+- Since this API  only returns weather forecast for 5 days with data every 3 hours I will use the 12PM hour as a reference for the dayli forecast
