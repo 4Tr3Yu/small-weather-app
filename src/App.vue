@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 	import Header from './components/Header.vue'
 	import Tabs from './components/Tabs.vue'
 	import HourlyWeatherDisplay from './components/HourlyWeatherDisplay.vue'
