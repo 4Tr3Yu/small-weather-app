@@ -22,3 +22,4 @@ Url: https://small-weather-app-pi.vercel.app/
 - Since this API  only returns weather forecast for 5 days with data every 3 hours I will use the 12PM hour as a reference for the dayli forecast
 - I could probably calculate the average temp of a given day 
 - Just notice that there is a min and max in the mock up ...
+- Done with with render logic, will give one more work block to connect to the API later today
