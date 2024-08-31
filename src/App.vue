@@ -19,22 +19,33 @@ const state = reactive({
 	lastUpdated: ''
 })
 
-
-onMounted(async () => {
-	const  apiUrl = ref(`${import.meta.env.VITE_BASE_URL}?lat=${state.selectedCity.lat}&lon=${state.selectedCity.lon}&units=metric&appid=${import.meta.env.VITE_APP_ID}`)
+const fetchWeatherData = async () => {
+	const  apiUrl = `${import.meta.env.VITE_BASE_URL}?lat=${state.selectedCity.lat}&lon=${state.selectedCity.lon}&units=metric&appid=${import.meta.env.VITE_APP_ID}`;
 	try {
-		console.log('API url',apiUrl.value)
-		const response  = await fetch(apiUrl.value)
+		const response  = await fetch(apiUrl)
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch weather data');
+		}
+
 		state.cityData = await response.json()
+		console.log('cityData', state.cityData)
 		state.lastUpdated = new Date().toLocaleString();
 	} catch (error) {
 		console.error(error)
 	} finally {
 		state.isLoading = false
 	}
+}
 
-})
+onMounted(fetchWeatherData)
 
+const onChangeCity = async (city:{name:string, lat:number, lon:number}) => {
+	console.log('newCity',city)
+	state.selectedCity = city;
+	state.isLoading = true;
+	fetchWeatherData();
+}
 
 </script>
 
@@ -44,12 +55,12 @@ onMounted(async () => {
 		<Header/>
 		<main class="px-2 mb-auto">
 			<div v-if="state.error" class="error">
-
+				<p>{{ state.error }}</p>
 			</div>
 			<div v-else class="content">
-				<Tabs />
-				<HourlyWeatherDisplay v-if="state.cityData" :cityData="state.cityData"/>
-				<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData"/>
+				<Tabs @change-city="onChangeCity"/>
+				<HourlyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
+				<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
 			</div>
 		</main>
 		<LastUpdated/>
