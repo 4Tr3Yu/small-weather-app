@@ -29,3 +29,11 @@
 	- Done with with render logic, will give one more work block to connect to the API later today
 
 	- I'm using fetch API instead of axios
+
+### 2 Hours and bit more
+Lots to improve:
+- Make the refresh button work, it would make sense after the responses are cached in local storage or something else
+- Move the data fetching to a composable
+- Last updated should probably be nested inside each of the cities
+- Search sounds easy enough but i have to process the .csv  (might do it tomorrow just for fun)
+- 
