@@ -63,7 +63,7 @@ const onChangeCity = async (city:{name:string, lat:number, lon:number}) => {
 				<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
 			</div>
 		</main>
-		<LastUpdated/>
+		<LastUpdated :lastUpdated="state.lastUpdated"/>
 	</div>
 </template>
 
