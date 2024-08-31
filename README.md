@@ -36,4 +36,5 @@ Lots to improve:
 - Move the data fetching to a composable
 - Last updated should probably be nested inside each of the cities
 - Search sounds easy enough but i have to process the .csv  (might do it tomorrow just for fun)
-- 
+- Ended up making the refresh button work, still thinking that it should work indepently for each city 
+- Cleaning and some refactoring could be done!

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { reactive, onMounted } from 'vue'
 import Header from './components/Header.vue'
 import Tabs from './components/Tabs.vue'
 import HourlyWeatherDisplay from './components/HourlyWeatherDisplay.vue'
@@ -63,7 +63,7 @@ const onChangeCity = async (city:{name:string, lat:number, lon:number}) => {
 				<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
 			</div>
 		</main>
-		<LastUpdated :lastUpdated="state.lastUpdated"/>
+		<LastUpdated @refresh-city-data="onChangeCity(state.selectedCity)" :lastUpdated="state.lastUpdated"/>
 	</div>
 </template>
 
