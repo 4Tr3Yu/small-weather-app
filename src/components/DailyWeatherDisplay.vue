@@ -1,35 +1,44 @@
 <script setup>
 import { reactive } from 'vue';
-import { data } from  "../assets/dummy.js";
-const {city, list} = data;
+
+const props = defineProps({
+	cityData: {
+		type: Object,
+		required: true,
+	},
+});
+
+const { list, city } = props.cityData;
 
 const forecastsGroupedByDate = list.reduce((nextDaysGrouped, forecast) => {
-  const date = forecast.dt_txt.split(' ')[0];
-  const currentDay = list[0].dt_txt.split(' ')[0].split('-')[2]
-  const forecastDay = date.split('-')[2];
-  if (forecastDay !== currentDay) {
-	if (!nextDaysGrouped[date] ) {
-	  nextDaysGrouped[date] = [];
+	const date = forecast.dt_txt.split(' ')[0];
+	const currentDay = list[0].dt_txt.split(' ')[0].split('-')[2]
+	const forecastDay = date.split('-')[2];
+	if (forecastDay !== currentDay) {
+		if (!nextDaysGrouped[date] ) {
+			nextDaysGrouped[date] = [];
+		}
+		nextDaysGrouped[date].push(forecast);
 	}
-	nextDaysGrouped[date].push(forecast);
-  }
-  return nextDaysGrouped;
+	return nextDaysGrouped;
 }, {});
 
 const findMinMaxTemps = (forecasts) => {
-  const temps = forecasts.map(forecast => forecast.main.temp);
-  return {
-	min: Math.min(...temps).toString().split('.')[0],
-	max: Math.max(...temps).toString().split('.')[0]
-  };
+	const temps = forecasts.map(forecast => forecast.main.temp);
+	return {
+		min: Math.min(...temps).toString().split('.')[0],
+		max: Math.max(...temps).toString().split('.')[0]
+	};
 };
 
 const isNoon = (timestamp) => timestamp === "12";
 
 const nextDaysForecasts = Object.entries(forecastsGroupedByDate).reduce((nextDays, [day, forecasts]) => {
-	const noonForecast = forecasts.filter(forecast => isNoon(forecast.dt_txt.split(' ')[1].split(':')[0]))[0];
-	console.log(forecasts);
-	console.log('noonForecast', noonForecast);	
+	let noonForecast = forecasts.filter(forecast => isNoon(forecast.dt_txt.split(' ')[1].split(':')[0]))[0];
+	if (!noonForecast) {
+		noonForecast = forecasts[0];
+	}
+
 	nextDays.push({
 		day,
 		formatedDay: new Date(day).toDateString().split(' ').slice(0, 3).join(' '),
@@ -39,10 +48,6 @@ const nextDaysForecasts = Object.entries(forecastsGroupedByDate).reduce((nextDay
 	})
 	return nextDays;
 }, []);
-
-console.log(nextDaysForecasts);
-
-
 </script>
 <template>
 	<div class="bg-white p-6 rounded-lg shadow-md mb-4">
@@ -56,7 +61,7 @@ console.log(nextDaysForecasts);
 					<img :src="'http://openweathermap.org/img/wn/' + forecast.icon + '.png'" :alt="forecast.description">
 					<div class="date text-center">
 						<p class="text-md text-sky-800 font-bold">{{ forecast.formatedDay }}</p>
-						<p class="text-sm text-sky-300">Mostly {{ forecast.description }}</p>
+						<p class="text-sm text-sky-300 capitalize">{{ forecast.description }}</p>
 
 					</div>
 					<div class="flex">

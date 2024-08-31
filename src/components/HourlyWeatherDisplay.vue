@@ -1,9 +1,15 @@
 <script setup>
-	import { reactive } from 'vue';
-	import { data } from  "../assets/dummy.js";
+import { reactive } from "vue";
+const props = defineProps({
+	cityData: {
+		type: Object,
+		required: true,
+	},
+});
 
-	const nextHoursForecast = reactive( data.list.slice(0, 4) );
-	const {city} = data;
+const { list, city } = props.cityData;
+
+const nextHoursForecast = reactive( list.slice(0, 4) );
 
 </script>
 <template>
