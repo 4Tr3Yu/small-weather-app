@@ -11,15 +11,21 @@
 
 ## Installing
 
+	I created an ```.env``` file to no expose the apikey, file must be crated and filled following the example file for the app to work.
+
 	- ```bun install```
 	- ```bun dev```
 
+
+
 ### Deploying to vercel on main branch changes
-Url: https://small-weather-app-pi.vercel.app/
+	Url: https://small-weather-app-pi.vercel.app/
 
 ### Notes
-- This one is the only API that worked with the provided apiKey: https://openweathermap.org/forecast5
-- Since this API  only returns weather forecast for 5 days with data every 3 hours I will use the 12PM hour as a reference for the dayli forecast
-- I could probably calculate the average temp of a given day 
-- Just notice that there is a min and max in the mock up ...
-- Done with with render logic, will give one more work block to connect to the API later today
+	- This one is the only API that worked with the provided apiKey: https://openweathermap.org/forecast5
+	- Since this API  only returns weather forecast for 5 days with data every 3 hours I will use the 12PM hour as a reference for the dayli forecast
+	- I could probably calculate the average temp of a given day 
+	- Just notice that there is a min and max in the mock up ...
+	- Done with with render logic, will give one more work block to connect to the API later today
+
+	- I'm using fetch API instead of axios
