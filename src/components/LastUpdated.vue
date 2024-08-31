@@ -1,5 +1,4 @@
 <script setup>
-import { defineEmits } from 'vue';
 import CommonButton from './UI/CommonButton.vue';
 
 const emit = defineEmits(['refresh-city-data']);

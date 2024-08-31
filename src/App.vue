@@ -59,8 +59,11 @@ const onChangeCity = async (city:{name:string, lat:number, lon:number}) => {
 			</div>
 			<div v-else class="content">
 				<Tabs @change-city="onChangeCity"/>
-				<HourlyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
-				<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
+				<div class="grid sm:grid-cols-2 gap-4">
+					<HourlyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
+					<DailyWeatherDisplay v-if="state.cityData" :cityData="state.cityData" :key="state.selectedCity.name"/>
+
+				</div>
 			</div>
 		</main>
 		<LastUpdated @refresh-city-data="onChangeCity(state.selectedCity)" :lastUpdated="state.lastUpdated"/>
